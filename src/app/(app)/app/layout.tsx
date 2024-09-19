@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <BackgroundPattern />
-      <div className="mx-auto max-w-[1100px] px-4">
+      <div className="mx-auto max-w-[1100px] px-4 flex flex-col min-h-screen">
         <AppHeader />
         {children}
         <AppFooter />
