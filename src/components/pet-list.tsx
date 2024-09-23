@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 export default function PetList() {
   const { pets, handleChangeSelectedPetId, selectedPetId } = usePetContext();
+  const selectedPet = pets.find((pet) => pet.id === selectedPetId);
   return (
     <ul className="bg-white border-b border-black/[0.08]">
       {pets.map((pet) => (
