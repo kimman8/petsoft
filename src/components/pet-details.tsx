@@ -28,7 +28,7 @@ type Props = {
 
 function TopBar({ pet }: Props) {
   return (
-    <div className="flex items-center px-8 py-5 bg-white border-b border-black/[0.08]">
+    <div className="flex items-center px-8 py-5 bg-white border-b border-light">
       <Image
         src={pet?.imageUrl}
         alt="Selected Pet image"
@@ -60,7 +60,7 @@ function InfoBar({ pet }: Props) {
 
 function Notes({ pet }: Props) {
   return (
-    <section className="flex-grow bg-white px-7 py-5 rounded-md mb-9 mx-8 border border-black/[0.08]">
+    <section className="flex-grow bg-white px-7 py-5 rounded-md mb-9 mx-8 border border-light">
       {pet?.notes}
     </section>
   );
