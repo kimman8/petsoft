@@ -1,9 +1,8 @@
 import AppFooter from '@/components/app-footer';
 import AppHeader from '@/components/app-header';
 import BackgroundPattern from '@/components/background-pattern';
-import PetContextProvider, {
-  PetContext,
-} from '@/contexts/pet-context-provider';
+import PetContextProvider from '@/contexts/pet-context-provider';
+import SearchContextProvider from '@/contexts/search-context-provider';
 import { Pet } from '@/lib/types';
 
 export default async function Layout({
@@ -23,7 +22,11 @@ export default async function Layout({
       <BackgroundPattern />
       <div className="mx-auto max-w-[1100px] px-4 flex flex-col min-h-screen">
         <AppHeader />
-        <PetContextProvider data={data}>{children}</PetContextProvider>
+
+        <SearchContextProvider>
+          <PetContextProvider data={data}>{children}</PetContextProvider>
+        </SearchContextProvider>
+
         <AppFooter />
       </div>
     </>
