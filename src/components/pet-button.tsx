@@ -8,7 +8,6 @@ import {
 } from './ui/dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
 import PetForm from './pet-form';
-import { act } from 'react';
 
 type PetButtonProps = {
   actionType: 'add' | 'edit' | 'checkout';
@@ -46,7 +45,7 @@ export default function PetButton({
             {actionType === 'add' ? 'Add a new pet' : 'Edit'}
           </DialogTitle>
         </DialogHeader>
-        <PetForm />
+        <PetForm actionType={actionType} />
       </DialogContent>
     </Dialog>
   );

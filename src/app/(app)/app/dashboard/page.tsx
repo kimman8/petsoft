@@ -5,8 +5,11 @@ import PetDetails from '@/components/pet-details';
 import PetList from '@/components/pet-list';
 import SearchForm from '@/components/search-form';
 import Stats from '@/components/stats';
+import { usePetContext } from '@/lib/hooks';
 
 export default async function Page() {
+  // const { handleAddPet } = usePetContext();
+
   return (
     <main>
       <div className="flex items-center justify-between text-white py-8">
@@ -21,6 +24,7 @@ export default async function Page() {
           <ContentBlock className="relative">
             <PetList />
             <div className="absolute bottom-4 right-4">
+              {/* <PetButton actionType="add" onClick={() => handleAddPet()} /> */}
               <PetButton actionType="add" />
             </div>
           </ContentBlock>
