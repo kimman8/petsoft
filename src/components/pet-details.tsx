@@ -28,6 +28,8 @@ type Props = {
 };
 
 function TopBar({ pet }: Props) {
+  const { handleDelete } = usePetContext();
+
   return (
     <div className="flex items-center px-8 py-5 bg-white border-b border-light">
       <Image
@@ -40,7 +42,9 @@ function TopBar({ pet }: Props) {
       <h2 className="text-3xl font-semibold ml-5 leading-7">{pet?.name}</h2>
       <div className="flex ml-auto space-x-2">
         <PetButton actionType="edit">Edit Pet</PetButton>
-        <PetButton actionType="checkout">Checkout</PetButton>
+        <PetButton actionType="checkout" onClick={() => handleDelete(pet?.id)}>
+          Checkout
+        </PetButton>
       </div>
     </div>
   );
