@@ -5,12 +5,17 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 import { usePetContext } from '@/lib/hooks';
+import { on } from 'events';
+
+type PetFormProps = {
+  actionType: 'add' | 'edit';
+  onFormSubmission: () => void;
+};
 
 export default function PetForm({
   actionType,
-}: {
-  actionType: 'add' | 'edit';
-}) {
+  onFormSubmission,
+}: PetFormProps) {
   const { handleAddPet } = usePetContext();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,6 +31,7 @@ export default function PetForm({
       notes: formData.get('notes') as string,
     };
     handleAddPet(newPet);
+    onFormSubmission();
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col">
