@@ -1,5 +1,6 @@
 'use server';
 import prisma from '@/lib/db';
+import { sleep } from '@/lib/utils';
 import { revalidatePath } from 'next/cache';
 
 export async function addPet(formData) {
@@ -16,4 +17,5 @@ export async function addPet(formData) {
     },
   });
   revalidatePath('/app', 'layout');
+  await sleep(2000);
 }

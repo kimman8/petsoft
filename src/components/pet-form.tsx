@@ -3,9 +3,9 @@
 import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { Button } from './ui/button';
 import { usePetContext } from '@/lib/hooks';
 import { addPet } from '@/actions/actions';
+import PetFormBtn from './pet-form-btn';
 
 type PetFormProps = {
   actionType: 'add' | 'edit';
@@ -76,10 +76,8 @@ export default function PetForm({
             required
           />
         </div>
+        <PetFormBtn actionType={actionType} />
       </div>
-      <Button type="submit" className="mt-5 self-end">
-        {actionType === 'add' ? 'Add Pet' : 'Update Pet'}
-      </Button>
     </form>
   );
 }
