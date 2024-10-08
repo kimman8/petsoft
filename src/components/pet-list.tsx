@@ -7,7 +7,6 @@ import { useMemo } from 'react';
 
 export default function PetList() {
   const { pets, handleChangeSelectedPetId, selectedPetId } = usePetContext();
-  console.log(pets);
   const { searchQuery } = useSearchContext();
 
   const filteredPets = useMemo(() => {
