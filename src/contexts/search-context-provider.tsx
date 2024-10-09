@@ -3,8 +3,8 @@
 import { useState, createContext } from 'react';
 
 type TSearchContext = {
-  searchQuery: string | null;
-  handleChangeSearchQuery: (newValue: string) => void | null;
+  searchQuery: string;
+  handleChangeSearchQuery: (newValue: string) => void;
 };
 
 type SearchContextProviderProps = {

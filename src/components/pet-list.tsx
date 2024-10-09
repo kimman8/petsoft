@@ -6,12 +6,14 @@ import Image from 'next/image';
 import { useMemo } from 'react';
 
 export default function PetList() {
-  const { pets, handleChangeSelectedPetId, selectedPetId } = usePetContext();
-  const { searchQuery } = useSearchContext();
+  const { pets, handleChangeSelectedPetId, selectedPetId } = usePetContext()!;
+  const { searchQuery = '' } = useSearchContext();
 
   const filteredPets = useMemo(() => {
     return pets.filter((pet) =>
-      pet?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+      (pet?.name?.toLowerCase() ?? '').includes(
+        (searchQuery ?? '').toLowerCase()
+      )
     );
   }, [pets, searchQuery]);
   return (

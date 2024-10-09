@@ -3,7 +3,7 @@
 import { useSearchContext } from '@/lib/hooks';
 
 export default function SearchForm() {
-  const { searchQuery, handleChangeSearchQuery } = useSearchContext();
+  const { searchQuery = '', handleChangeSearchQuery } = useSearchContext();
 
   return (
     <form className="w-full h-full">

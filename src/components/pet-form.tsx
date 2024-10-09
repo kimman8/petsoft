@@ -15,7 +15,11 @@ export default function PetForm({
   actionType,
   onFormSubmission,
 }: PetFormProps) {
-  const { selectedPet, handleAddPet, handleEditPet } = usePetContext();
+  const petContext = usePetContext();
+  if (!petContext) {
+    throw new Error('PetContext is null');
+  }
+  const { selectedPet, handleAddPet, handleEditPet } = petContext;
   return (
     <form
       action={async (formData) => {
@@ -45,7 +49,7 @@ export default function PetForm({
             id="name"
             name="name"
             type="text"
-            defaultValue={actionType === 'edit' ? selectedPet.name : ''}
+            defaultValue={actionType === 'edit' ? selectedPet?.name : ''}
             required
           />
         </div>
@@ -55,7 +59,7 @@ export default function PetForm({
             id="ownerName"
             name="ownerName"
             type="text"
-            defaultValue={actionType === 'edit' ? selectedPet.ownerName : ''}
+            defaultValue={actionType === 'edit' ? selectedPet?.ownerName : ''}
             required
           />
         </div>
@@ -65,7 +69,7 @@ export default function PetForm({
             id="imageUrl"
             name="imageUrl"
             type="text"
-            defaultValue={actionType === 'edit' ? selectedPet.imageUrl : ''}
+            defaultValue={actionType === 'edit' ? selectedPet?.imageUrl : ''}
           />
         </div>
         <div className="space-y-1">
@@ -74,7 +78,7 @@ export default function PetForm({
             id="age"
             name="age"
             type="number"
-            defaultValue={actionType === 'edit' ? selectedPet.age : ''}
+            defaultValue={actionType === 'edit' ? selectedPet?.age : ''}
             required
           />
         </div>
@@ -84,7 +88,7 @@ export default function PetForm({
             id="notes"
             name="notes"
             rows={3}
-            defaultValue={actionType === 'edit' ? selectedPet.notes : ''}
+            defaultValue={actionType === 'edit' ? selectedPet?.notes : ''}
             required
           />
         </div>

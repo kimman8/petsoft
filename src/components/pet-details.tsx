@@ -1,15 +1,16 @@
 'use client';
 
 import { usePetContext } from '@/lib/hooks';
-import { Pet } from '@/lib/types';
 import Image from 'next/image';
 import PetButton from './pet-button';
-import { toast } from 'sonner';
-import { deletePet } from '@/actions/actions';
-import { useTransition } from 'react';
+import { Pet } from '@prisma/client';
 
 export default function PetDetails() {
-  const { selectedPet } = usePetContext();
+  const petContext = usePetContext();
+  if (!petContext) {
+    return <EmptyView />;
+  }
+  const { selectedPet } = petContext;
 
   return (
     <section className="flex flex-col h-full w-full ">
@@ -27,12 +28,15 @@ export default function PetDetails() {
 }
 
 type Props = {
-  pet: Pet | undefined;
+  pet: Pet;
 };
 
 function TopBar({ pet }: Props) {
-  const [isPending, startTransition] = useTransition();
-  const { handleCheckoutPet } = usePetContext();
+  const petContext = usePetContext();
+  if (!petContext) {
+    return null; // or handle the null case appropriately
+  }
+  const { handleCheckoutPet } = petContext;
   return (
     <div className="flex items-center px-8 py-5 bg-white border-b border-light">
       <Image
@@ -47,7 +51,6 @@ function TopBar({ pet }: Props) {
         <PetButton actionType="edit">Edit Pet</PetButton>
         <PetButton
           actionType="checkout"
-          disabled={isPending}
           onClick={async () => {
             await handleCheckoutPet(pet.id);
           }}
@@ -66,11 +69,11 @@ function InfoBar({ pet }: Props) {
         <h3 className="text-[13px] font-medium uppercase text-zinc-700">
           Owner name
         </h3>
-        <p className="mt-1 text-zinc-800 text-lg">{pet?.ownerName}</p>
+        <p className="mt-1 text-zinc-800 text-lg">{pet.ownerName}</p>
       </div>
       <div>
         <h3 className="text-[13px] font-medium uppercase text-zinc-700">Age</h3>
-        <p className="mt-1 text-zinc-800 text-lg">{pet?.age}</p>
+        <p className="mt-1 text-zinc-800 text-lg">{pet.age}</p>
       </div>
     </div>
   );
@@ -79,7 +82,7 @@ function InfoBar({ pet }: Props) {
 function Notes({ pet }: Props) {
   return (
     <section className="flex-grow bg-white px-7 py-5 rounded-md mb-9 mx-8 border border-light">
-      {pet?.notes}
+      {pet.notes}
     </section>
   );
 }
