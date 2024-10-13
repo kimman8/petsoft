@@ -6,7 +6,7 @@ import { PetEssentials } from '@/lib/types';
 import { Pet } from '@prisma/client';
 import { petFormSchema } from '@/lib/validations';
 
-export async function addPet(pet: PetEssentials) {
+export async function addPet(pet: unknown) {
   await sleep(1000);
   const validatedPet = petFormSchema.safeParse(pet);
   if (!validatedPet.success) {
@@ -26,7 +26,7 @@ export async function addPet(pet: PetEssentials) {
   revalidatePath('/app', 'layout');
 }
 
-export async function editPet(petId: Pet['id'], newPetData: PetEssentials) {
+export async function editPet(petId: unknown, newPetData: unknown) {
   await sleep(1000);
   try {
     await prisma.pet.update({
@@ -43,7 +43,7 @@ export async function editPet(petId: Pet['id'], newPetData: PetEssentials) {
   revalidatePath('/app', 'layout');
 }
 
-export async function deletePet(petId: Pet['id']) {
+export async function deletePet(petId: unknown) {
   await sleep(1000);
   try {
     await prisma.pet.delete({
