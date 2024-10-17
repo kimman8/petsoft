@@ -12,6 +12,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const pets = await prisma.pet.findMany();
+  const users = await prisma.user.findUnique({});
 
   return (
     <>
