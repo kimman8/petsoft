@@ -11,11 +11,11 @@ export default function AuthForm({ type }: AuthFormProps) {
     <form action={logIn}>
       <div className="space-y-1">
         <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" />
+        <Input type="email" id="email" name="email" />
       </div>
       <div className="space-y-1 mt-2">
         <Label htmlFor="password">Password</Label>
-        <Input type="password" id="password" />
+        <Input type="password" id="password" name="password" />
       </div>
 
       <Button className="mt-4">
