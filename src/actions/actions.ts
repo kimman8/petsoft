@@ -3,7 +3,7 @@
 import prisma from '@/lib/db';
 import { sleep } from '@/lib/utils';
 import { revalidatePath } from 'next/cache';
-import { petFormSchema, petIdSchema } from '@/lib/validations';
+import { authSchema, petFormSchema, petIdSchema } from '@/lib/validations';
 import { auth, signIn, signOut } from '@/lib/auth';
 import bcrypt from 'bcryptjs';
 import { redirect } from 'next/navigation';
@@ -19,9 +19,20 @@ export async function signUp(formData: FormData) {
     formData.get('password') as string,
     10
   );
+  // convert formData to a plain object
+  const formDataEntries = Object.fromEntries(formData.entries());
+
+  // validation
+  const validatedFormData = authSchema.safeParse(formDataEntries);
+  if (!validatedFormData.success) {
+    return {
+      message: 'Invalid form data.',
+    };
+  }
+  const { email, password } = validatedFormData.data;
   await prisma?.user.create({
     data: {
-      email: formData.get('email') as string,
+      email,
       hashedPassword,
     },
   });
